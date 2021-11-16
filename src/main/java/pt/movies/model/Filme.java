@@ -12,17 +12,21 @@ import java.util.List;
  * @author nelson.mourao
  */
 public class Filme {
-    private static int nextId;
-    private int id;
+
+    private String imdbId;
     private String titulo;
     private Date dataEstreia;
     private GeneroEnum genero;
     private List<Ator> elenco;
-    private Double classificacao;
+    private Double classificação;
     private Integer duracao; //minutos
 
     public Filme(){
-        this.id = this.nextId++;
+    }
+    
+     public Filme(String imdbId,String titulo){
+        setImdbId(imdbId);
+        setTitulo(titulo);
     }
     
     public String getTitulo() {
@@ -57,16 +61,12 @@ public class Filme {
         this.elenco = elenco;
     }
 
-    public Double getClassificacao() {
-        return classificacao;
+    public Double getClassificação() {
+        return classificação;
     }
 
-    public void setClassificacao(Double classificacao) {
-        this.classificacao = classificacao;
-    }
-
-    public int getId() {
-        return id;
+    public void setClassificação(Double classificação) {
+        this.classificação = classificação;
     }
 
     public Integer getDuracao() {
@@ -76,6 +76,17 @@ public class Filme {
     public void setDuracao(Integer duracao) {
         this.duracao = duracao;
     }
-    
-    
+
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
+    }
+
+    @Override
+    public String toString() {
+        return "\n" + getImdbId()+ " - " + getTitulo();
+    }   
 }
