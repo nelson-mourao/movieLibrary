@@ -87,6 +87,18 @@ public class Filme {
 
     @Override
     public String toString() {
-        return "\n" + getImdbId()+ " - " + getTitulo();
-    }   
+        String toString = "Filme{" + "imdbId=" + imdbId + ", titulo=" + titulo + ", dataEstreia=" + dataEstreia + ", genero=" + genero  + "\n classifica\u00e7\u00e3o=" + classificação + ", duracao=" + duracao + ", elenco:";
+        String toStringAtores = "";
+        
+        if(elenco!=null){       
+            for(Ator ator:elenco){
+                toStringAtores = toStringAtores + "\n" + ator.toString();
+            }
+        }
+        return toString + toStringAtores;
+    }
+  
+
+    
+    
 }

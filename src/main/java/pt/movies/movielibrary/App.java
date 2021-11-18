@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import pt.movies.model.Ator;
 import pt.movies.model.Filme;
 import pt.movies.util.ServiceUtil;
 
@@ -38,10 +39,16 @@ public class App {
                 for(Filme f :filmes){
                     System.out.println(f.toString());
                 }
+                System.out.println("Insira o id do Filme que pertende obter detalhe\nInsira 'exit' para sair");
+                String id = reader.readLine();
+                if(!"exit".equals(id)){
+                    Filme filme = getMovieDetail(id);
+                    System.out.println(filme.toString());
+                }
+                
             }else{
                 System.out.println("Não foram encontrados filmes");
             }
-            
           
             
         } catch (IOException ex) {
@@ -64,6 +71,30 @@ public class App {
             filmes.add(new Filme(jsonMovie.getString("id"),jsonMovie.getString("title")));   
         }
         return filmes;
+    }
+    
+    /**
+    *
+    * devolve detalhe 
+    * de um filme
+    */
+    public static Filme getMovieDetail(String id){
+        String result = ServiceUtil.getMovieDetail(id);
+        System.out.println(result);
+        JSONObject jsonResult = new JSONObject(result);
+        Filme filme = new Filme();
+        filme.setTitulo( jsonResult.getString("title"));
+        //filme.setDataEstreia(jsonResult.getString("releaseDate"));
+        filme.setDuracao((Integer.valueOf(jsonResult.getString("runtimeMins"))));
+        JSONArray jsonActorList = jsonResult.getJSONArray("actorList");
+        List<Ator> atores = new ArrayList<>();
+        for(int i=0;i<jsonActorList.length();i++){
+            JSONObject jsonActor = jsonActorList.getJSONObject(i);
+            atores.add(new Ator(jsonActor.getString("name"),jsonActor.getString("asCharacter") ));   
+        } 
+        
+        filme.setElenco(atores);
+        return filme;
     }
     
     
