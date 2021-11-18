@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -37,7 +38,7 @@ public class App {
             
             if(filmes!=null && filmes.size()>0){
                 for(Filme f :filmes){
-                    System.out.println(f.toString());
+                    System.out.println(f.getImdbId() + " - " + f.getTitulo());
                 }
                 System.out.println("Insira o id do Filme que pertende obter detalhe\nInsira 'exit' para sair");
                 String id = reader.readLine();
@@ -79,22 +80,30 @@ public class App {
     * de um filme
     */
     public static Filme getMovieDetail(String id){
-        String result = ServiceUtil.getMovieDetail(id);
-        System.out.println(result);
-        JSONObject jsonResult = new JSONObject(result);
-        Filme filme = new Filme();
-        filme.setTitulo( jsonResult.getString("title"));
-        //filme.setDataEstreia(jsonResult.getString("releaseDate"));
-        filme.setDuracao((Integer.valueOf(jsonResult.getString("runtimeMins"))));
-        JSONArray jsonActorList = jsonResult.getJSONArray("actorList");
-        List<Ator> atores = new ArrayList<>();
-        for(int i=0;i<jsonActorList.length();i++){
-            JSONObject jsonActor = jsonActorList.getJSONObject(i);
-            atores.add(new Ator(jsonActor.getString("name"),jsonActor.getString("asCharacter") ));   
-        } 
-        
-        filme.setElenco(atores);
-        return filme;
+        try{
+            
+            String result = ServiceUtil.getMovieDetail(id);
+            System.out.println(result);
+            JSONObject jsonResult = new JSONObject(result);
+            Filme filme = new Filme();
+            filme.setImdbId(jsonResult.getString("id"));
+            filme.setTitulo( jsonResult.getString("title"));
+            filme.setDataEstreia( new SimpleDateFormat("yyyy-MM-dd").parse(jsonResult.getString("releaseDate")));
+            filme.setDuracao((Integer.valueOf(jsonResult.getString("runtimeMins"))));
+            filme.setClassificação(Double.valueOf(jsonResult.getString("imDbRating")));
+            JSONArray jsonActorList = jsonResult.getJSONArray("actorList");
+            List<Ator> atores = new ArrayList<>();
+            for(int i=0;i<jsonActorList.length();i++){
+                JSONObject jsonActor = jsonActorList.getJSONObject(i);
+                atores.add(new Ator(jsonActor.getString("name"),jsonActor.getString("asCharacter") ));   
+            } 
+
+            filme.setElenco(atores);
+            return filme;
+        }catch(Exception e){
+            System.out.println("Ocorreu um erro a obter os detalhes");    
+        }
+        return new Filme();
     }
     
     

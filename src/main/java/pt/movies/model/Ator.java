@@ -18,6 +18,7 @@ public class Ator {
 
     public Ator(String nome,String personagem){
         this.nome=nome;
+        this.personagem =  personagem;
     }
     
     public String getPersonagem() {

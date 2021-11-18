@@ -87,7 +87,7 @@ public class Filme {
 
     @Override
     public String toString() {
-        String toString = "Filme{" + "imdbId=" + imdbId + ", titulo=" + titulo + ", dataEstreia=" + dataEstreia + ", genero=" + genero  + "\n classifica\u00e7\u00e3o=" + classificação + ", duracao=" + duracao + ", elenco:";
+        String toString = "Filme: " + "\n imdbId=" + imdbId + "\n titulo=" + titulo + "\n dataEstreia=" + dataEstreia + "\n genero=" + genero  + "\n classifica\u00e7\u00e3o=" + classificação + "\n duracao(min)=" + duracao + "\n elenco:";
         String toStringAtores = "";
         
         if(elenco!=null){       
