@@ -4,11 +4,11 @@
  */
 package pt.movies.movielibrary;
 
-import java.awt.BorderLayout;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -88,9 +88,10 @@ public class App {
             Filme filme = new Filme();
             filme.setImdbId(jsonResult.getString("id"));
             filme.setTitulo( jsonResult.getString("title"));
-            filme.setDataEstreia( new SimpleDateFormat("yyyy-MM-dd").parse(jsonResult.getString("releaseDate")));
+            filme.setDataEstreia( LocalDate.parse(jsonResult.getString("releaseDate"), DateTimeFormatter.ISO_DATE));
             filme.setDuracao((Integer.valueOf(jsonResult.getString("runtimeMins"))));
             filme.setClassificação(Double.valueOf(jsonResult.getString("imDbRating")));
+            filme.setGenero(jsonResult.getString("genres"));
             JSONArray jsonActorList = jsonResult.getJSONArray("actorList");
             List<Ator> atores = new ArrayList<>();
             for(int i=0;i<jsonActorList.length();i++){

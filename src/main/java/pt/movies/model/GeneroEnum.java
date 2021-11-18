@@ -18,5 +18,8 @@ enum GeneroEnum {
     Romance,
     SyFy,
     Thriller,
+    Mystery,
+    Family,
+    Adventure
     
 }

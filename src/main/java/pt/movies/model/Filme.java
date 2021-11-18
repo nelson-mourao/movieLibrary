@@ -4,7 +4,8 @@
  */
 package pt.movies.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,18 +16,18 @@ public class Filme {
 
     private String imdbId;
     private String titulo;
-    private Date dataEstreia;
-    private GeneroEnum genero;
+    private LocalDate dataEstreia;
+    private List<GeneroEnum> genero;
     private List<Ator> elenco;
     private Double classificação;
     private Integer duracao; //minutos
-
-    public Filme(){
-    }
     
      public Filme(String imdbId,String titulo){
         setImdbId(imdbId);
         setTitulo(titulo);
+    }
+
+    public Filme() {
     }
     
     public String getTitulo() {
@@ -37,22 +38,32 @@ public class Filme {
         this.titulo = titulo;
     }
 
-    public Date getDataEstreia() {
+    public LocalDate getDataEstreia() {
         return dataEstreia;
     }
 
-    public void setDataEstreia(Date dataEstreia) {
+    public void setDataEstreia(LocalDate dataEstreia) {
         this.dataEstreia = dataEstreia;
     }
 
-    public GeneroEnum getGenero() {
+    public List<GeneroEnum> getGenero() {
         return genero;
     }
 
-    public void setGenero(GeneroEnum genero) {
+    public void setGenero(List<GeneroEnum> genero) {
         this.genero = genero;
     }
-
+    
+    public void setGenero(String genero) {
+        List<GeneroEnum> generoTemp = new ArrayList<>();
+        for(GeneroEnum e :GeneroEnum.values()){
+            if(genero.contains(e.name())){
+                generoTemp.add(e);
+            }
+        }
+        this.genero = generoTemp;
+    }
+    
     public List<Ator> getElenco() {
         return elenco;
     }

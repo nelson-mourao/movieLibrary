@@ -4,7 +4,7 @@
  */
 package pt.movies.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -14,7 +14,7 @@ public class Ator {
     private String nome;
     private String personagem;
     private String nacionalidade;
-    private Date dataNascimento; 
+    private LocalDate dataNascimento; 
 
     public Ator(String nome,String personagem){
         this.nome=nome;
@@ -45,11 +45,11 @@ public class Ator {
         this.nacionalidade = nacionalidade;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
