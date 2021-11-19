@@ -34,15 +34,4 @@ public class ServiceUtil {
         .build();
        return webClient2.get().uri(TOKEN_IMDB+id+"/"+DETAIL_CAST+","+DETAIL_RATINGS+","+DETAIL_FAQ).retrieve().bodyToMono(String.class).block();
     }
-     
-     
-      public static String getMovieDetailImdbAlternative(String pesquisa){
-        WebClient webClient2 = WebClient.builder()
-        .baseUrl("https://imdb8.p.rapidapi.com/")
-        .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-        .defaultHeader("x-rapidapi-host", "imdb8.p.rapidapi.com")
-	.defaultHeader("x-rapidapi-key", "06feeefce8msh7dd7155897f2647p152b46jsnbbc265d7cfa3")
-        .build();
-       return webClient2.get().uri("title/find?q="+pesquisa).retrieve().bodyToMono(String.class).block();
-    }
 }
