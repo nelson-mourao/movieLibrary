@@ -21,15 +21,15 @@ public class Filme {
     private List<Ator> elenco;
     private Double classificação;
     private Integer duracao; //minutos
-    
-     public Filme(String imdbId,String titulo){
+
+    public Filme(String imdbId, String titulo) {
         setImdbId(imdbId);
         setTitulo(titulo);
     }
 
     public Filme() {
     }
-    
+
     public String getTitulo() {
         return titulo;
     }
@@ -53,17 +53,17 @@ public class Filme {
     public void setGenero(List<GeneroEnum> genero) {
         this.genero = genero;
     }
-    
+
     public void setGenero(String genero) {
         List<GeneroEnum> generoTemp = new ArrayList<>();
-        for(GeneroEnum e :GeneroEnum.values()){
-            if(genero.contains(e.name())){
+        for (GeneroEnum e : GeneroEnum.values()) {
+            if (genero.contains(e.name())) {
                 generoTemp.add(e);
             }
         }
         this.genero = generoTemp;
     }
-    
+
     public List<Ator> getElenco() {
         return elenco;
     }
@@ -98,18 +98,15 @@ public class Filme {
 
     @Override
     public String toString() {
-        String toString = "Filme: " + "\n imdbId=" + imdbId + "\n titulo=" + titulo + "\n dataEstreia=" + dataEstreia + "\n genero=" + genero  + "\n classifica\u00e7\u00e3o=" + classificação + "\n duracao(min)=" + duracao + "\n elenco:";
+        String toString = "Filme: " + "\n imdbId=" + imdbId + "\n titulo=" + titulo + "\n dataEstreia=" + dataEstreia + "\n genero=" + genero + "\n classifica\u00e7\u00e3o=" + classificação + "\n duracao(min)=" + duracao + "\n elenco:";
         String toStringAtores = "";
-        
-        if(elenco!=null){       
-            for(Ator ator:elenco){
+
+        if (elenco != null) {
+            for (Ator ator : elenco) {
                 toStringAtores = toStringAtores + "\n" + ator.toString();
             }
         }
         return toString + toStringAtores;
     }
-  
 
-    
-    
 }

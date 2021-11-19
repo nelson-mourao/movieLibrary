@@ -11,16 +11,17 @@ import java.time.LocalDate;
  * @author nelson.mourao
  */
 public class Ator {
+
     private String nome;
     private String personagem;
     private String nacionalidade;
-    private LocalDate dataNascimento; 
+    private LocalDate dataNascimento;
 
-    public Ator(String nome,String personagem){
-        this.nome=nome;
-        this.personagem =  personagem;
+    public Ator(String nome, String personagem) {
+        this.nome = nome;
+        this.personagem = personagem;
     }
-    
+
     public String getPersonagem() {
         return personagem;
     }
@@ -28,7 +29,7 @@ public class Ator {
     public void setPersonagem(String personagem) {
         this.personagem = personagem;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -57,7 +58,5 @@ public class Ator {
     public String toString() {
         return "Ator{" + "nome=" + nome + ", personagem=" + personagem + ", nacionalidade=" + nacionalidade + ", dataNascimento=" + dataNascimento + '}';
     }
-    
-    
-    
+
 }
