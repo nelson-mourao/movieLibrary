@@ -12,26 +12,34 @@ import org.springframework.web.reactive.function.client.WebClient;
  *
  * @author nelson.mourao
  */
-
 public class ServiceUtil {
-    
+
     private static final String TOKEN_IMDB = "/k_b2e2u4qg/";
     private static final String DETAIL_CAST = "FullCast";
     private static final String DETAIL_RATINGS = "Ratings";
     private static final String DETAIL_FAQ = "faq";
-    public static String getMovies(String pesquisa){
+
+    /**
+     * Realiza uma procura na API do imdb de filmes com base numa String
+     * pesquisa Devolve uma String JSON com o response
+     */
+    public static String getMovies(String pesquisa) {
         WebClient webClient2 = WebClient.builder()
-        .baseUrl("https://imdb-api.com/en/API/Search")
-        .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-        .build();
-       return webClient2.get().uri(TOKEN_IMDB.concat(pesquisa)).retrieve().bodyToMono(String.class).block();
+                .baseUrl("https://imdb-api.com/en/API/Search")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+        return webClient2.get().uri(TOKEN_IMDB.concat(pesquisa)).retrieve().bodyToMono(String.class).block();
     }
-    
-     public static String getMovieDetail(String id){
+
+    /**
+     * Realiza uma procura na API do imdb do detalhe de filme com base num id do
+     * imdb pesquisa Devolve uma String JSON com o response
+     */
+    public static String getMovieDetail(String id) {
         WebClient webClient2 = WebClient.builder()
-        .baseUrl("https://imdb-api.com/en/API/Title")
-        .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-        .build();
-       return webClient2.get().uri(TOKEN_IMDB+id+"/"+DETAIL_CAST+","+DETAIL_RATINGS+","+DETAIL_FAQ).retrieve().bodyToMono(String.class).block();
+                .baseUrl("https://imdb-api.com/en/API/Title")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+        return webClient2.get().uri(TOKEN_IMDB + id + "/" + DETAIL_CAST + "," + DETAIL_RATINGS + "," + DETAIL_FAQ).retrieve().bodyToMono(String.class).block();
     }
 }
